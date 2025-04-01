@@ -24,14 +24,15 @@ const validateProductData = (data) => {
 // Route: Create a new product
 router.post('/create-product', pupload.array('images', 10), async (req, res) => {
     console.log("🛒 Creating product");
-    const { name, description, category, tags, price, stock, email } = req.body;
+    const { name, description, category, email } = req.body;
+    const tags = req.body.tags || [];
+    const price = req.body.price ? Number(req.body.price) : 0;
+    const stock = req.body.stock ? Number(req.body.stock) : 1;
 
-    // Map uploaded files to accessible URLs
     const images = req.files.map((file) => {
         return `/products/${path.basename(file.path)}`;
     });
 
-    // Validate input data
     const validationErrors = validateProductData({ name, description, category, price, stock, email });
     if (validationErrors.length > 0) {
         return res.status(400).json({ errors: validationErrors });
@@ -42,7 +43,6 @@ router.post('/create-product', pupload.array('images', 10), async (req, res) => 
     }
 
     try {
-        // Check if user exists
         const user = await User.findOne({ email });
         if (!user) {
             return res.status(400).json({ error: 'Email does not exist in the users database' });
@@ -69,6 +69,7 @@ router.post('/create-product', pupload.array('images', 10), async (req, res) => 
         res.status(500).json({ error: 'Server error. Could not create product.' });
     }
 });
+
 
 router.get('/get-products', async (req, res) => {
     try {

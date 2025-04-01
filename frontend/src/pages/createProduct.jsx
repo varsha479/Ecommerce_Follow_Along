@@ -67,11 +67,18 @@ const CreateProduct = () => {
         formData.append("name", name);
         formData.append("description", description);
         formData.append("category", category);
-        formData.append("tags", tags.split(",").map(tag => tag.trim()));
+        formData.append("tags", tags.split(",").map(tag => tag.trim()).join(",")); 
         formData.append("price", price);
         formData.append("stock", stock);
         formData.append("email", email);
         images.forEach((image) => formData.append("images", image));
+
+         // ✅ Add Debugging Logs Before Sending Request
+    console.log("🚀 Sending Data:");
+    for (let [key, value] of formData.entries()) {
+        console.log(`${key}:`, value);
+    }
+
 
         try {
             const url = isEdit 
