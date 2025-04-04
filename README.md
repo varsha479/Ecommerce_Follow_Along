@@ -624,7 +624,7 @@ PayPalScriptProvider: Utilized this component to display online payment methods 
 This milestone ensures a seamless and secure online payment experience for users.
 
 
-Milestone 31: Implementing Global State Management with Redux
+###Milestone 31: Implementing Global State Management with Redux
 Overview
 In this milestone, we have integrated Redux for global state management in our application. This helps maintain a centralized state, improving data consistency and management across components.
 Features
@@ -637,5 +637,21 @@ Implemented store.js to configure the Redux store with a userReducer for managin
 Created setEmail function in userActions.js to update the email state globally.
 Provider Setup: Wrapped the App component with the Redux Provider in index.js to enable state access throughout the application.
 
+# Milestone 32 : In this milestone, we will add the mail to the global state that we created earlier and access the mail in all pages.
+Key feautures :
+In Login page we will use Dispatch method to store the mail inside global state.
+In all the remaining pages acc the mail stored in global state using useSelector.
+Summary : Now every page can access email through useSelector hook without hardcoding it.
+Tech Stack : Frontend 
+
+# Milestone 33 : In this milestone, we will learn how to create an JWT token and store them inside an cookie.
+Key feautures :
+Download jsonwebtoken package using NPM.
+Use sign method to create an JWT token with mail and ID.
+Give maxAge to set expire time.
+Add the cookie inside the response that helps you to store the cookie inside browser.
+Summary : Learn how to create an JWT token.
+How to store the tokens inside the cookie.
+Tech Stack : JWT Tokens
 
 

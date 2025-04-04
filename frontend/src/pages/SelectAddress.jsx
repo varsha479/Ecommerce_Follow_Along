@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Nav from '../components/nav'; // Ensure correct casing
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 
 const SelectAddress = () => {
@@ -13,10 +14,13 @@ const SelectAddress = () => {
 
 
 
-    const userEmail = 'varshakannan@gmail.com';
+    const userEmail = useSelector((state)=>state.user.email);
+    
 
 
     useEffect(() => {
+        if(!userEmail)
+            return;
         const fetchAddresses = async () => {
             try {
                 const response = await axios.get('http://localhost:8000/api/v2/user/addresses', {
